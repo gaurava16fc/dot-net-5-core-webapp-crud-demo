@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DotNet5CoreWebApp.Models.Employee>
+
+@{
+    ViewData["Title"] = "EmployeeList";
+}
+
+<h1>Employees List</h1>
+
+<p class="float-right">
+    <a asp-action="Create" class="btn btn-outline-primary">Add New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @*<a asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a>*@
+
+                    @Html.ActionLink("Edit", "Create", new { id = item.EmployeeId, item.Name, item.Gender, item.City, item.DateOfBirth, item.DepartmentId }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Delete", "DeleteEmployee", new { item.EmployeeId }, new { @class = "btn btn-danger", onClick = "return confirm('Are you sure you want to delete this record?');" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
